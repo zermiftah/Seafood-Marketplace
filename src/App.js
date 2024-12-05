@@ -8,6 +8,8 @@ import Header from "./Components/Header/Header";
 import HeaderSection from "./Components/HeaderSection/HeaderSection";
 import Footer from "./Components/Footer/Footer";
 import ProductList from "./Components/ProductList/ProductList";
+import DetailProduct from "./Components/DetailProduct/DetailProduct";
+import CategorySection from "./Components/CategorySection/CategorySection";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <>
             <Header />
             <HeaderSection />
+            <CategorySection />
             <MainPage />
             <Footer />
           </>} />
@@ -28,6 +31,12 @@ function App() {
           <>
             <Header />
             <ProductList />
+            <Footer />
+          </>} />
+          <Route exact path="/DetailProduct" element={
+          <>
+            <Header />
+            <DetailProduct />
             <Footer />
           </>} />
       </Routes>

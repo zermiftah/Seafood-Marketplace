@@ -1,7 +1,20 @@
-import data from "../../Assets/data.json";
+import axios from "axios";
+import { useState, useEffect } from 'react'
 
 export default function HeaderSection() {
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("https://seafood-marketplace-backend.glitch.me/data");
+                setData(response.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
     return (
         <div className="bg-white">
             <main>
@@ -28,37 +41,14 @@ export default function HeaderSection() {
                                                     <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                                                         <img
                                                             alt=""
-                                                            src={`/img/${data[0].Product_Image}`}
+                                                            src={data[0]?.Product_Image}
                                                             className="size-full object-cover"
                                                         />
                                                     </div>
                                                     <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                         <img
                                                             alt=""
-                                                            src={`/img/${data[1].Product_Image}`}
-                                                            className="size-full object-cover"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                                                    <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                        <img
-                                                            alt=""
-                                                            src={`/img/${data[2].Product_Image}`}
-                                                            className="size-full object-cover"
-                                                        />
-                                                    </div>
-                                                    <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                        <img
-                                                            alt=""
-                                                            src={`/img/${data[3].Product_Image}`}
-                                                            className="size-full object-cover"
-                                                        />
-                                                    </div>
-                                                    <div className="h-64 w-44 overflow-hidden rounded-lg">
-                                                        <img
-                                                            alt=""
-                                                            src={`/img/${data[4].Product_Image}`}
+                                                            src={data[1]?.Product_Image}
                                                             className="size-full object-cover"
                                                         />
                                                     </div>
@@ -67,14 +57,37 @@ export default function HeaderSection() {
                                                     <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                         <img
                                                             alt=""
-                                                            src={`/img/${data[5].Product_Image}`}
+                                                            src={data[2]?.Product_Image}
                                                             className="size-full object-cover"
                                                         />
                                                     </div>
                                                     <div className="h-64 w-44 overflow-hidden rounded-lg">
                                                         <img
                                                             alt=""
-                                                            src={`/img/${data[6].Product_Image}`}
+                                                            src={data[3]?.Product_Image}
+                                                            className="size-full object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="h-64 w-44 overflow-hidden rounded-lg">
+                                                        <img
+                                                            alt=""
+                                                            src={data[4]?.Product_Image}
+                                                            className="size-full object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                                                    <div className="h-64 w-44 overflow-hidden rounded-lg">
+                                                        <img
+                                                            alt=""
+                                                            src={data[5]?.Product_Image}
+                                                            className="size-full object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="h-64 w-44 overflow-hidden rounded-lg">
+                                                        <img
+                                                            alt=""
+                                                            src={data[6]?.Product_Image}
                                                             className="size-full object-cover"
                                                         />
                                                     </div>

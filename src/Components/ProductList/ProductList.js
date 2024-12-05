@@ -1,20 +1,70 @@
-
-import data from "../../Assets/data.json";
-
-import { Fragment, useState } from 'react'
+import axios from "axios";
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Disclosure, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
-
+import SplashPhoto from "../../Assets/img/SplashPhoto.png"
 
 export default function ProductList() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [selectedFilters, setSelectedFilters] = useState({
-        categories: [], 
+        categories: [],
         type: "",
     });
-    const products = data;
+    const [products, setproducts] = useState([]);
+    const [updating, setUpdating] = useState(false);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setUpdating(true);
+                const response = await axios.get("https://seafood-marketplace-backend.glitch.me/data");
+                setproducts(response.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            } finally {
+                setUpdating(false);
+              }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const categoryParam = queryParams.get("recommended");
+        const categoryFilterParam = queryParams.get("category");
+
+        // Update type filter based on "recommended" query param
+        if (categoryParam === "New Arrival") {
+            setSelectedFilters((prev) => ({
+                ...prev,
+                type: "New Arrival",
+            }));
+        } else if (categoryParam === "Discount") {
+            setSelectedFilters((prev) => ({
+                ...prev,
+                type: "Discount",
+            }));
+        } else {
+            setSelectedFilters((prev) => ({
+                ...prev,
+                type: "",
+            }));
+        }
+
+        // Update categories filter based on "category" query param
+        if (categoryFilterParam) {
+            setSelectedFilters((prev) => ({
+                ...prev,
+                categories: [categoryFilterParam], // assuming the category is a single value
+            }));
+        } else {
+            setSelectedFilters((prev) => ({
+                ...prev,
+                categories: [], // reset categories if no "category" param
+            }));
+        }
+    }, []);
     const filters = [
         {
             id: 'Recomemended For You',
@@ -36,7 +86,7 @@ export default function ProductList() {
     ]
 
 
-    const filteredProducts = products.filter((product) => {
+    const filteredProducts = products?.filter((product) => {
         const matchesCategory =
             selectedFilters.categories.length === 0 ||
             selectedFilters.categories.includes(product.Product_Category);
@@ -52,6 +102,16 @@ export default function ProductList() {
     }
 
     return (
+        <>
+        {updating && (
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <img
+              className="max-h-28 w-auto animate-bounce animate-infinite"
+              src={SplashPhoto}
+              alt="Your Company"
+            />
+          </div>
+        )} 
         <div className="bg-white">
             <div>
                 <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -126,7 +186,6 @@ export default function ProductList() {
                                                                             onChange={() => {
                                                                                 setSelectedFilters((prevFilters) => {
                                                                                     if (section.id === "Recomemended For You") {
-                                                                                        // Toggle tipe produk
                                                                                         return {
                                                                                             ...prevFilters,
                                                                                             type:
@@ -135,7 +194,6 @@ export default function ProductList() {
                                                                                                     : option.value,
                                                                                         };
                                                                                     } else {
-                                                                                        // Toggle kategori produk
                                                                                         const newCategories = prevFilters.categories.includes(option.value)
                                                                                             ? prevFilters.categories.filter(
                                                                                                 (category) => category !== option.value
@@ -257,13 +315,14 @@ export default function ProductList() {
 
                             <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
                                 {filteredProducts.map((product) => (
-                                    <div
+                                    <a
                                         key={product.Product_Name}
+                                        href={`/DetailProduct?product_name=${encodeURIComponent(product.Product_Name)}`}
                                         className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
                                     >
                                         <div className="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
                                             <img
-                                                src={`/img/${product.Product_Image}`}
+                                                src={product.Product_Image}
                                                 alt={product.Product_Name}
                                                 className="h-full w-full object-cover object-center sm:h-full sm:w-full"
                                             />
@@ -272,9 +331,6 @@ export default function ProductList() {
                                             <h3 className="text-sm font-medium text-gray-900">
                                                 {product.Product_Name}
                                             </h3>
-                                            <p className="text-sm text-gray-500">
-                                                {product.Description}
-                                            </p>
                                             <div className="flex flex-1 flex-col justify-end">
                                                 {product.Categories === "Discount" ? (
                                                     <>
@@ -300,7 +356,7 @@ export default function ProductList() {
                                                 )}
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 ))}
                             </div>
                         </section>
@@ -309,5 +365,6 @@ export default function ProductList() {
 
             </div>
         </div>
+        </>
     )
 }
