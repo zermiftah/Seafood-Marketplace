@@ -117,27 +117,33 @@ export default function Header() {
                                                 <div className="grid grid-cols-2 gap-x-4 gap-y-10">
                                                     {groupedCategories[category].map((item) => (
                                                         <div key={item.Product_Name} className="group relative">
-                                                            <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
-                                                                <img
-                                                                    src={item.Product_Image}
-                                                                    alt={item.Product_Name}
-                                                                    className="object-cover object-center w-full h-full"
-                                                                />
-                                                            </div>
-                                                            <a href="#" className="mt-6 block text-sm font-medium text-gray-900">
-                                                                {item.Product_Name}
+                                                            <a
+                                                                href={`/DetailProduct?product_name=${encodeURIComponent(item.Product_Name)}`}
+                                                                className="block"
+                                                            >
+                                                                <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
+                                                                    <img
+                                                                        src={item.Product_Image}
+                                                                        alt={item.Product_Name}
+                                                                        className="object-cover object-center w-full h-full"
+                                                                        style={{ height: '200px', width: '100%' }} // Menetapkan ukuran tetap
+                                                                    />
+                                                                </div>
+                                                                <div className="mt-6 text-sm font-medium text-gray-900">
+                                                                    {item.Product_Name}
+                                                                </div>
+                                                                <div className="mt-1 text-sm">
+                                                                    {item.Discount > 0 ? (
+                                                                        <>
+                                                                            <span className="text-gray-400 line-through">${item.Product_Price.toFixed(2)}</span>
+                                                                            <span className="ml-2 text-red-600">${(item.Product_Price * (1 - item.Discount / 100)).toFixed(2)}</span>
+                                                                            <span className="ml-2 text-green-600">{item.Discount}% Off</span>
+                                                                        </>
+                                                                    ) : (
+                                                                        <span className="text-gray-900">${item.Product_Price.toFixed(2)}</span>
+                                                                    )}
+                                                                </div>
                                                             </a>
-                                                            <div className="mt-1 text-sm">
-                                                                {item.Discount > 0 ? (
-                                                                    <>
-                                                                        <span className="text-gray-400 line-through">${item.Product_Price.toFixed(2)}</span>
-                                                                        <span className="ml-2 text-red-600">${(item.Product_Price * (1 - item.Discount / 100)).toFixed(2)}</span>
-                                                                        <span className="ml-2 text-green-600">{item.Discount}% Off</span>
-                                                                    </>
-                                                                ) : (
-                                                                    <span className="text-gray-900">${item.Product_Price.toFixed(2)}</span>
-                                                                )}
-                                                            </div>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -188,7 +194,7 @@ export default function Header() {
                                     <a href="/MainPage">
                                         <span className="sr-only">Your Company</span>
                                         <img
-                                            className="h-16 w-40 rounded-md" 
+                                            className="h-16 w-36 rounded-md py-1.5"
                                             src={SeafoodLogo2}
                                             alt="Seafood Marketplace Logo"
                                         />

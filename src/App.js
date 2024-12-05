@@ -10,6 +10,7 @@ import Footer from "./Components/Footer/Footer";
 import ProductList from "./Components/ProductList/ProductList";
 import DetailProduct from "./Components/DetailProduct/DetailProduct";
 import CategorySection from "./Components/CategorySection/CategorySection";
+import Freezer from "./Components/Freezer/Freezer";
 
 function App() {
   return (
@@ -33,10 +34,16 @@ function App() {
             <ProductList />
             <Footer />
           </>} />
-          <Route exact path="/DetailProduct" element={
+        <Route exact path="/DetailProduct" element={
           <>
             <Header />
             <DetailProduct />
+            <Footer />
+          </>} />
+        <Route exact path="/Freezer" element={
+          <>
+            <Header />
+            <Freezer />
             <Footer />
           </>} />
       </Routes>
