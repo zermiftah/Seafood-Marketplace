@@ -188,7 +188,7 @@ export default function Header() {
                                     <a href="/MainPage">
                                         <span className="sr-only">Your Company</span>
                                         <img
-                                            className="h-12 w-auto rounded-md" // Perbesar logo dan tambahkan sudut melengkung
+                                            className="h-16 w-40 rounded-md" 
                                             src={SeafoodLogo2}
                                             alt="Seafood Marketplace Logo"
                                         />
@@ -216,7 +216,7 @@ export default function Header() {
                                     <img
                                         src={SeafoodLogo2}
                                         alt=""
-                                        className="h-12 w-32 rounded-md"
+                                        className="h-12 w-auto rounded-md"
                                     />
                                 </a>
 
