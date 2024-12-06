@@ -5,7 +5,7 @@ import {
     Bars3Icon,
     MagnifyingGlassIcon,
     QuestionMarkCircleIcon,
-    ShoppingBagIcon,
+    ArchiveBoxIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 
@@ -19,6 +19,30 @@ export default function Header() {
     const [open, setOpen] = useState(false)
     const [username, setUsername] = useState('');
     const [data, setData] = useState([]);
+    const [dataFreezerCount, setDataFreezerCount] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const username = localStorage.getItem('usernameFishMarketplace');
+
+            if (!username) {
+                console.log("Username not found in localStorage");
+                return;
+            }
+
+            try {
+                const response = await axios.post(
+                    "https://seafood-marketplace-backend.glitch.me/freezer",
+                    { Username: username }
+                );
+                setDataFreezerCount(response.data.Freezer.length); // Menggunakan panjang data
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -194,7 +218,7 @@ export default function Header() {
                                     <a href="/MainPage">
                                         <span className="sr-only">Your Company</span>
                                         <img
-                                            className="h-16 w-36 rounded-md py-1.5"
+                                            className="h-16 w-46 rounded-md py-1.5"
                                             src={SeafoodLogo2}
                                             alt="Seafood Marketplace Logo"
                                         />
@@ -239,17 +263,17 @@ export default function Header() {
                                         <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
                                             Help
                                         </a>
-
-                                        {/* Cart */}
-                                        <div className="ml-4 flow-root lg:ml-8">
-                                            <a href="#" className="group -m-2 flex items-center p-2">
-                                                <ShoppingBagIcon
+                                        <div className="ml-4 flow-root lg:ml-8 relative">
+                                            <a href="/Freezer" className="group -m-2 flex items-center p-2">
+                                                <ArchiveBoxIcon
                                                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                                     aria-hidden="true"
                                                 />
-                                                <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                                                <span className="sr-only">items in cart, view bag</span>
+                                                <span className="sr-only">items in cart, view freezer</span>
                                             </a>
+                                            <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-medium">
+                                                {dataFreezerCount}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

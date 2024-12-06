@@ -11,6 +11,8 @@ import ProductList from "./Components/ProductList/ProductList";
 import DetailProduct from "./Components/DetailProduct/DetailProduct";
 import CategorySection from "./Components/CategorySection/CategorySection";
 import Freezer from "./Components/Freezer/Freezer";
+import AdditionalSection from "./Components/AdditionalSection/AdditionalSection";
+import ReviewsSection from "./Components/DetailProduct/ReviewsSection";
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
             <HeaderSection />
             <CategorySection />
             <MainPage />
+            <AdditionalSection />
             <Footer />
           </>} />
         <Route exact path="/ProductList" element={
@@ -38,12 +41,14 @@ function App() {
           <>
             <Header />
             <DetailProduct />
+            <ReviewsSection />
             <Footer />
           </>} />
         <Route exact path="/Freezer" element={
           <>
             <Header />
             <Freezer />
+            <AdditionalSection />
             <Footer />
           </>} />
       </Routes>

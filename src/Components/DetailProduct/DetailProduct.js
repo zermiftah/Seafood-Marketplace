@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import { CheckIcon, StarIcon } from '@heroicons/react/20/solid';
-import { ShieldCheckIcon } from '@heroicons/react/24/outline';
+import { CheckIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/20/solid';
 import { useLocation } from 'react-router-dom';
 import SplashPhoto from "../../Assets/img/SplashPhoto.png"
 
@@ -16,7 +15,16 @@ export default function DetailProduct() {
   const [updating, setUpdating] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const productNameFromQuery = queryParams.get('product_name'); // Get the product name from the query string
+  const productNameFromQuery = queryParams.get('product_name');
+  const [quantity, setQuantity] = useState(1);
+
+  const handleDecrease = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +48,40 @@ export default function DetailProduct() {
     ? product?.Product_Price - (product?.Product_Price * product?.Discount) / 100
     : product?.Product_Price;
 
+
+  const username = localStorage.getItem('usernameFishMarketplace');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Mencegah reload halaman
+
+    if (!username) {
+      alert('Username is not set. Please log in first.');
+      return;
+    }
+
+    try {
+      const newProduct = {
+        Username: username,
+        Product_Name: product?.Product_Name,
+        Product_Category: product?.Product_Category,
+        Product_Image: product?.Product_Image.replace('http://seafood-marketplace-backend.glitch.me/img/', ''),
+        Product_Price: product?.Product_Price,
+        Count: quantity,
+        Discount: product?.Discount || 0,
+      };      
+
+      const response = await axios.post('https://seafood-marketplace-backend.glitch.me/add-to-freezer', newProduct);
+
+      if (response.status === 200) {
+        alert('Product added to freezer successfully!');
+      }
+    } catch (error) {
+      console.error('Error adding product to freezer:', error);
+      alert('Failed to add product to freezer. Please try again later.');
+    }
+  };
+
+
   return (
     <>
       {updating && (
@@ -52,7 +94,7 @@ export default function DetailProduct() {
         </div>
       )}
       <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-6">
           <div className="lg:max-w-lg lg:self-end">
             <div className="mt-4">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{product?.Product_Name}</h1>
@@ -123,10 +165,35 @@ export default function DetailProduct() {
               </h2>
 
               <form>
-                <div className="mt-10">
+                <div className="mt-4 flex items-center space-x-2">
                   <button
-                    type="submit"
-                    className="flex w-full items-center justify-center rounded-md inline-block rounded-md border border-transparent bg-sky-100 px-8 py-3 text-center font-medium text-sky-700 hover:bg-sky-300 hover:text-white"
+                    type="button"
+                    onClick={handleDecrease}
+                    className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                    className="w-12 rounded-md border border-gray-300 px-2 py-1 text-sm text-center text-gray-700 appearance-none focus:outline-none"
+                    min="1"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleIncrease}
+                    className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div className="mt-6">
+                  <button
+                    type="button" 
+                    onClick={handleSubmit} 
+                    className="flex w-full items-center justify-center rounded-md inline-block border border-transparent bg-sky-100 px-8 py-3 text-center font-medium text-sky-700 hover:bg-sky-300 hover:text-white"
                   >
                     Add to freezer
                   </button>
