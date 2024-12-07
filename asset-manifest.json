@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Seafood-Marketplace/static/css/main.486fcb8e.css",
-    "main.js": "/Seafood-Marketplace/static/js/main.f52930e0.js",
+    "main.js": "/Seafood-Marketplace/static/js/main.103a9720.js",
     "static/js/453.8bc746c5.chunk.js": "/Seafood-Marketplace/static/js/453.8bc746c5.chunk.js",
     "static/media/AdditionalSectionPhoto.jpg": "/Seafood-Marketplace/static/media/AdditionalSectionPhoto.80a6b433b5064398151e.jpg",
     "static/media/DashboardPhoto.jpg": "/Seafood-Marketplace/static/media/DashboardPhoto.0b955c7cca0ee9a816c8.jpg",
@@ -12,11 +12,11 @@
     "static/media/Mussets.jpg": "/Seafood-Marketplace/static/media/Mussets.4d0fbf99fb465545620c.jpg",
     "index.html": "/Seafood-Marketplace/index.html",
     "main.486fcb8e.css.map": "/Seafood-Marketplace/static/css/main.486fcb8e.css.map",
-    "main.f52930e0.js.map": "/Seafood-Marketplace/static/js/main.f52930e0.js.map",
+    "main.103a9720.js.map": "/Seafood-Marketplace/static/js/main.103a9720.js.map",
     "453.8bc746c5.chunk.js.map": "/Seafood-Marketplace/static/js/453.8bc746c5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.486fcb8e.css",
-    "static/js/main.f52930e0.js"
+    "static/js/main.103a9720.js"
   ]
 }
