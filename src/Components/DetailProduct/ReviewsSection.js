@@ -15,7 +15,7 @@ const reviews = {
             id: 1,
             rating: 5,
             content: `
-               <p>This is the seafood platter of my dreams. I enjoyed it on my last beach vacation and was amazed at how fresh and flavorful the shrimp, lobster, and scallops were. It was the perfect feast for the many relaxing days by the ocean.</p>
+               <p>This seafood platter was a dream! Fresh, flavorful, and perfectly cooked—each bite was a delight. It made my trip even more memorable. Highly recommend for seafood lovers!</p>
             `,
             author: 'Emily Selman',
             avatarSrc: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
@@ -65,7 +65,7 @@ const reviews = {
             author: 'David Hayes',
             avatarSrc: 'https://plus.unsplash.com/premium_photo-1688497830987-e4f7ce4da50b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         },
-    ],    
+    ],
 }
 
 function classNames(...classes) {
@@ -152,7 +152,7 @@ export default function ReviewsSection() {
                     </div>
                 </div>
 
-                <div className="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0 "> 
+                <div className="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0 ">
                     <h3 className="sr-only">Recent reviews</h3>
 
                     <div className="flow-root mb-12">

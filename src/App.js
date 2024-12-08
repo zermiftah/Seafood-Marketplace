@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Login from "./Components/Login/Login";
@@ -13,15 +13,14 @@ import CategorySection from "./Components/CategorySection/CategorySection";
 import Freezer from "./Components/Freezer/Freezer";
 import AdditionalSection from "./Components/AdditionalSection/AdditionalSection";
 import ReviewsSection from "./Components/DetailProduct/ReviewsSection";
+import ContactUs from "./Components/ContactUs/ContactUs";
+import Carousel from "./Components/Carousel/Carousel";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={
-          <>
-            <Login />
-          </>} />
+        <Route exact path="/" element={<Login />} />
         <Route exact path="/MainPage" element={
           <>
             <Header />
@@ -30,27 +29,38 @@ function App() {
             <MainPage />
             <AdditionalSection />
             <Footer />
-          </>} />
+          </>
+        } />
         <Route exact path="/ProductList" element={
           <>
             <Header />
             <ProductList />
             <Footer />
-          </>} />
+          </>
+        } />
         <Route exact path="/DetailProduct" element={
           <>
             <Header />
             <DetailProduct />
             <ReviewsSection />
             <Footer />
-          </>} />
+          </>
+        } />
         <Route exact path="/Freezer" element={
           <>
             <Header />
             <Freezer />
             <AdditionalSection />
             <Footer />
-          </>} />
+          </>
+        } />
+        <Route exact path="/ContactUs" element={
+          <>
+            <Header />
+            <ContactUs />
+            <Footer />
+          </>
+        } />
       </Routes>
     </Router>
   );

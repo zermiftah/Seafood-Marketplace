@@ -21,7 +21,7 @@ export default function Footer() {
         products: [...new Set(data?.map(item => item.Product_Category))] 
         .map(category => ({
             name: category,  
-            href: `/ProductList?category=${encodeURIComponent(category)}`  
+            href: `#/ProductList?category=${encodeURIComponent(category)}`  
         })),
         company: [
             { name: 'Who we are', href: '#' },

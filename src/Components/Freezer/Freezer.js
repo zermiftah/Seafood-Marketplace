@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CheckIcon, ClockIcon } from '@heroicons/react/20/solid';
 import SplashPhoto from "../../Assets/img/SplashPhoto.png"
@@ -6,6 +7,14 @@ import SplashPhoto from "../../Assets/img/SplashPhoto.png"
 export default function Freezer() {
     const [data, setData] = useState([]);
     const [updating, setUpdating] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const username = localStorage.getItem("usernameFishMarketplace");
+        if (!username) {
+            navigate("/");
+        }
+    }, [navigate]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,7 +50,7 @@ export default function Freezer() {
     }, []);
 
     const calculateDiscountedPrice = (price, discount) => price - price * (discount / 100);
-    
+
     console.log('Data:', data)
 
     return (
@@ -172,6 +181,12 @@ export default function Freezer() {
                                     <dd className="text-sm font-medium text-gray-900">$5.00</dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                                    <dt className="flex items-center text-sm text-gray-600">
+                                        <span>Tax estimate</span>
+                                    </dt>
+                                    <dd className="text-sm font-medium text-gray-900">$3.55</dd>
+                                </div>
+                                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                                     <dt className="text-base font-medium text-gray-900">Order total</dt>
                                     <dd className="text-base font-medium text-gray-900">
                                         ${(
@@ -184,7 +199,7 @@ export default function Freezer() {
                                                     ) *
                                                     product.Count,
                                                 0
-                                            ) + 5
+                                            ) + 5 + 3.55
                                         ).toFixed(2)}
                                     </dd>
                                 </div>
@@ -192,7 +207,7 @@ export default function Freezer() {
                             <div className="mt-6">
                                 <button
                                     type="submit"
-                                    className="w-full rounded-md border border-transparent px-4 py-3 text-base font-medium text-white shadow-sm bg-sky-500 px-8 py-3 text-center font-medium text-sky-700 hover:bg-sky-700 hover:text-white"
+                                    className="w-full rounded-md border border-transparent px-4 py-3 text-base font-medium shadow-sm bg-sky-100 px-8 py-3 text-center font-medium text-sky-700 hover:bg-sky-300 hover:text-white"
                                 >
                                     Checkout
                                 </button>

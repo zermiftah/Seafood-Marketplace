@@ -1,9 +1,10 @@
 {
-  "name": "FishMarketplace",
+  "name": "Seafood-Marketplace",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://zermiftah.github.io/Seafood-Marketplace/",
   "dependencies": {
-    "@headlessui/react": "^1.7.18",
+    "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.1.1",
     "axios": "^1.7.9",
     "react": "^18.2.0",
@@ -21,7 +22,9 @@
     "start": "cross-env PORT=3010 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "gh-pages": "^6.2.0"
   }
 }

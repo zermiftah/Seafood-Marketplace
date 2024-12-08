@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CheckIcon, StarIcon, ShieldCheckIcon } from '@heroicons/react/20/solid';
 import { useLocation } from 'react-router-dom';
 import SplashPhoto from "../../Assets/img/SplashPhoto.png"
@@ -11,6 +12,15 @@ function classNames(...classes) {
 }
 
 export default function DetailProduct() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const username = localStorage.getItem("usernameFishMarketplace");
+    if (!username) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   const [product, setProduct] = useState(null);
   const [updating, setUpdating] = useState(false);
   const location = useLocation();
@@ -68,7 +78,7 @@ export default function DetailProduct() {
         Product_Price: product?.Product_Price,
         Count: quantity,
         Discount: product?.Discount || 0,
-      };      
+      };
 
       const response = await axios.post('https://seafood-marketplace-backend.glitch.me/add-to-freezer', newProduct);
 
@@ -94,7 +104,7 @@ export default function DetailProduct() {
         </div>
       )}
       <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-6">
+        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-12">
           <div className="lg:max-w-lg lg:self-end">
             <div className="mt-4">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{product?.Product_Name}</h1>
@@ -110,8 +120,8 @@ export default function DetailProduct() {
                   {product?.Categories === "Discount" ? (
                     <>
                       <span className="line-through text-gray-500 mr-2">${product?.Product_Price.toFixed(2)}</span>
-                      <span className="text-red-500 font-semibold">${discountedPrice.toFixed(2)}</span>
-                      <span className="ml-2 text-xs font-medium text-green-500">-{product?.Discount}% Off</span>
+                      <span className="text-green-500 font-semibold">${discountedPrice.toFixed(2)}</span>
+                      <span className="ml-2 text-xs font-medium text-red-500">-{product?.Discount}% Off</span>
                     </>
                   ) : (
                     `$${product?.Product_Price.toFixed(2)}`
@@ -191,8 +201,8 @@ export default function DetailProduct() {
 
                 <div className="mt-6">
                   <button
-                    type="button" 
-                    onClick={handleSubmit} 
+                    type="button"
+                    onClick={handleSubmit}
                     className="flex w-full items-center justify-center rounded-md inline-block border border-transparent bg-sky-100 px-8 py-3 text-center font-medium text-sky-700 hover:bg-sky-300 hover:text-white"
                   >
                     Add to freezer

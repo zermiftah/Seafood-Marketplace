@@ -6,23 +6,23 @@ export default function CategorySection() {
     const categories = [
         {
             name: 'Fish',
-            href: `/ProductList?category=${encodeURIComponent('Fish')}`,
+            href: `#/ProductList?category=${encodeURIComponent('Fish')}`,
             imageSrc: FishPhoto,
         },
         {
             name: 'Shrimp',
-            href: `/ProductList?category=${encodeURIComponent('Shrimp')}`,
+            href: `#/ProductList?category=${encodeURIComponent('Shrimp')}`,
             imageSrc: ShrimpPhoto,
         },
         {
             name: 'Mussets',
-            href: `/ProductList?category=${encodeURIComponent('Mussets')}`,
+            href: `#/ProductList?category=${encodeURIComponent('Mussets')}`,
             imageSrc: MussetsPhoto,
         },
     ];
     return (
         <div className="bg-white">
-            <div className="py-16 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
+            <div className="py-6 sm:py-6 xl:mx-auto xl:max-w-7xl xl:px-8">
                 <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
                     <h2 className="text-2xl font-bold tracking-tight text-gray-900">Get by Category</h2>
                 </div>

@@ -1,10 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import SplashPhoto from "../../Assets/img/SplashPhoto.png"
 
 export default function MainPage() {
+
     const [data, setData] = useState([]);
     const [updating, setUpdating] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const username = localStorage.getItem("usernameFishMarketplace");
+        if (!username) {
+            navigate("/");
+        }
+    }, [navigate]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,7 +54,7 @@ export default function MainPage() {
                             />
                         </div>
                         <h3 className="mt-4 text-sm text-gray-700">
-                            <a href={`/DetailProduct?product_name=${encodeURIComponent(product.Product_Name)}`}>
+                            <a href={`#/DetailProduct?product_name=${encodeURIComponent(product.Product_Name)}`}>
                                 <span className="absolute inset-0" />
                                 {product.Product_Name}
                             </a>
@@ -96,7 +106,7 @@ export default function MainPage() {
                                         {category}
                                     </h2>
                                     <a
-                                        href={`/ProductList?recommended=${encodeURIComponent(category)}`}
+                                        href={`#/ProductList?recommended=${encodeURIComponent(category)}`}
                                         className={`hidden text-sm font-medium ${category === 'New Arrival' || category === 'Discount' ? 'text-blue-600 hover:text-indigo-500' : 'text-gray-600 hover:text-gray-800'
                                             } md:block`}
                                     >
@@ -109,7 +119,7 @@ export default function MainPage() {
                         )
                     ))}
                     <div className="mt-8 text-sm md:hidden">
-                        <a href="/ProductList" className="font-medium text-blue-600 hover:text-indigo-500">
+                        <a href="#/ProductList" className="font-medium text-blue-600 hover:text-indigo-500">
                             See All Products
                             <span aria-hidden="true"> &rarr;</span>
                         </a>

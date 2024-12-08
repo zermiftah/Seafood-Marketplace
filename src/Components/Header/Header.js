@@ -35,7 +35,7 @@ export default function Header() {
                     "https://seafood-marketplace-backend.glitch.me/freezer",
                     { Username: username }
                 );
-                setDataFreezerCount(response.data.Freezer.length); // Menggunakan panjang data
+                setDataFreezerCount(response.data.Freezer.length);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -75,9 +75,7 @@ export default function Header() {
 
     const handleLogout = () => {
         localStorage.removeItem('usernameFishMarketplace');
-        localStorage.removeItem('passwordFishMarketplace');
-
-        window.location.href = '/';
+        window.location.href = '#/';
     };
     return (
         <div className="bg-white">
@@ -142,7 +140,7 @@ export default function Header() {
                                                     {groupedCategories[category].map((item) => (
                                                         <div key={item.Product_Name} className="group relative">
                                                             <a
-                                                                href={`/DetailProduct?product_name=${encodeURIComponent(item.Product_Name)}`}
+                                                                href={`#/DetailProduct?product_name=${encodeURIComponent(item.Product_Name)}`}
                                                                 className="block"
                                                             >
                                                                 <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75">
@@ -160,8 +158,8 @@ export default function Header() {
                                                                     {item.Discount > 0 ? (
                                                                         <>
                                                                             <span className="text-gray-400 line-through">${item.Product_Price.toFixed(2)}</span>
-                                                                            <span className="ml-2 text-red-600">${(item.Product_Price * (1 - item.Discount / 100)).toFixed(2)}</span>
-                                                                            <span className="ml-2 text-green-600">{item.Discount}% Off</span>
+                                                                            <span className="ml-2 text-green-600">${(item.Product_Price * (1 - item.Discount / 100)).toFixed(2)}</span>
+                                                                            <span className="ml-2 text-red-600">{item.Discount}% Off</span>
                                                                         </>
                                                                     ) : (
                                                                         <span className="text-gray-900">${item.Product_Price.toFixed(2)}</span>
@@ -180,17 +178,25 @@ export default function Header() {
                     </div>
                 </Dialog>
             </Transition.Root>
-
             <header className="relative">
                 <nav aria-label="Top">
+                    {/* Top Bar */}
                     <div className="bg-gray-900">
                         <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                            {/* Free Delivery Info */}
+                            <div className="hidden sm:block text-center grow">
+                                <span className="text-sm font-medium text-white">
+                                    Get free delivery on orders over $700
+                                </span>
+                            </div>
+                            {/* User Authentication */}
                             <div className="flex items-center space-x-6 ml-auto">
                                 {username ? (
                                     <>
                                         <span className="text-sm font-medium text-white">
                                             Hello, {username} 😊
                                         </span>
+                                        <span className="mx-2 text-white">|</span>
                                         <button
                                             onClick={handleLogout}
                                             className="text-sm font-medium text-white hover:text-gray-100"
@@ -200,7 +206,7 @@ export default function Header() {
                                     </>
                                 ) : (
                                     <>
-                                        <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
+                                        <a href="#/" className="text-sm font-medium text-white hover:text-gray-100">
                                             Sign in
                                         </a>
                                         <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
@@ -211,12 +217,13 @@ export default function Header() {
                             </div>
                         </div>
                     </div>
+
                     <div className="bg-white">
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                             <div className="flex h-16 items-center justify-between">
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                                    <a href="/MainPage">
-                                        <span className="sr-only">Your Company</span>
+                                    <a href="#/MainPage">
+                                        <span className="sr-only">Seafood</span>
                                         <img
                                             className="h-16 w-46 rounded-md py-1.5"
                                             src={SeafoodLogo2}
@@ -234,14 +241,9 @@ export default function Header() {
                                         <span className="sr-only">Open menu</span>
                                         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                                     </button>
-
-                                    <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
-                                        <span className="sr-only">Search</span>
-                                        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                                    </a>
                                 </div>
 
-                                <a href="\MainPage" className="lg:hidden">
+                                <a href="#/MainPage" className="lg:hidden">
                                     <span className="sr-only">Your Company</span>
                                     <img
                                         src={SeafoodLogo2}
@@ -251,20 +253,12 @@ export default function Header() {
                                 </a>
 
                                 <div className="flex flex-1 items-center justify-end">
-                                    <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
-                                        Search
-                                    </a>
-
-                                    <div className="flex items-center lg:ml-8">
-                                        <a href="#" className="p-2 text-gray-400 hover:text-gray-500 lg:hidden">
-                                            <span className="sr-only">Help</span>
-                                            <QuestionMarkCircleIcon className="h-6 w-6" aria-hidden="true" />
-                                        </a>
-                                        <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
-                                            Help
+                                    <div className="flex items-center lg:ml-8 space-x-4">
+                                        <a href="#/ContactUs" className="hidden text-sm font-medium text-gray-500 hover:text-gray-600 lg:block">
+                                            Contact Us
                                         </a>
                                         <div className="ml-4 flow-root lg:ml-8 relative">
-                                            <a href="/Freezer" className="group -m-2 flex items-center p-2">
+                                            <a href="#/Freezer" className="group -m-2 flex items-center p-2">
                                                 <ArchiveBoxIcon
                                                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                                     aria-hidden="true"
@@ -282,7 +276,6 @@ export default function Header() {
                     </div>
                 </nav>
             </header>
-
         </div>
     )
 }

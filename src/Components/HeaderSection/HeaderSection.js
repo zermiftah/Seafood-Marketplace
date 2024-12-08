@@ -97,7 +97,7 @@ export default function HeaderSection() {
                                     </div>
 
                                     <a
-                                        href="/ProductList"
+                                        href="#/ProductList"
                                         className="inline-block rounded-md border border-transparent bg-sky-100 px-8 py-3 text-center font-medium text-sky-700 hover:bg-sky-300 hover:text-white"
                                     >
                                         See All Products
