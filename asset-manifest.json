@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/Seafood-Marketplace/static/css/main.81a8ad73.css",
-    "main.js": "/Seafood-Marketplace/static/js/main.b412989b.js",
+    "main.css": "/Seafood-Marketplace/static/css/main.dce55b0f.css",
+    "main.js": "/Seafood-Marketplace/static/js/main.4f77223d.js",
     "static/js/453.8bc746c5.chunk.js": "/Seafood-Marketplace/static/js/453.8bc746c5.chunk.js",
     "static/media/AdditionalSectionPhoto.jpg": "/Seafood-Marketplace/static/media/AdditionalSectionPhoto.80a6b433b5064398151e.jpg",
     "static/media/DashboardPhoto.jpg": "/Seafood-Marketplace/static/media/DashboardPhoto.0b955c7cca0ee9a816c8.jpg",
+    "static/media/CarouselPhoto1.webp": "/Seafood-Marketplace/static/media/CarouselPhoto1.8f416cb0942ad783d9c8.webp",
+    "static/media/CarouselPhoto3.webp": "/Seafood-Marketplace/static/media/CarouselPhoto3.f64020bfd4640daccbb7.webp",
     "static/media/Fish.jpg": "/Seafood-Marketplace/static/media/Fish.4100af0677a2ecc2fab9.jpg",
     "static/media/Seafood_Logo2.png": "/Seafood-Marketplace/static/media/Seafood_Logo2.f2d9c863bfe727777bbf.png",
     "static/media/SplashPhoto.png": "/Seafood-Marketplace/static/media/SplashPhoto.f559969595118b557961.png",
     "static/media/Shrimp.jpg": "/Seafood-Marketplace/static/media/Shrimp.453c4802bc172a0fd726.jpg",
     "static/media/Mussets.jpg": "/Seafood-Marketplace/static/media/Mussets.4d0fbf99fb465545620c.jpg",
     "index.html": "/Seafood-Marketplace/index.html",
-    "main.81a8ad73.css.map": "/Seafood-Marketplace/static/css/main.81a8ad73.css.map",
-    "main.b412989b.js.map": "/Seafood-Marketplace/static/js/main.b412989b.js.map",
+    "main.dce55b0f.css.map": "/Seafood-Marketplace/static/css/main.dce55b0f.css.map",
+    "main.4f77223d.js.map": "/Seafood-Marketplace/static/js/main.4f77223d.js.map",
     "453.8bc746c5.chunk.js.map": "/Seafood-Marketplace/static/js/453.8bc746c5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.81a8ad73.css",
-    "static/js/main.b412989b.js"
+    "static/css/main.dce55b0f.css",
+    "static/js/main.4f77223d.js"
   ]
 }
